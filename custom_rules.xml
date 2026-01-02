@@ -1,0 +1,8 @@
+<group name="local,syslog,sshd,">
+  <rule id="100100" level="12">
+    <if_sid>30401</if_sid>
+    <match>SQL Injection</match>
+    <description>WAF Critical: SQL Injection Attack Detected</description>
+    <group>modsecurity,attack,</group>
+  </rule>
+</group>
