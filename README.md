@@ -24,6 +24,7 @@ graph TD;
     ModSec -->|Alerts Log Analysis| WazuhAgent[Wazuh Agent];
     WazuhAgent -->|Forwarded Events| WazuhManager[Wazuh SIEM];
     WazuhManager -->|Level 12 Alert| Dashboard[Kibana Dashboard];
+```
 🛠️ Technologies Used
 SIEM: Wazuh (Manager & Agent)
 
@@ -43,6 +44,9 @@ Phase 2: SIEM Integration & Custom Rules (Blue Team)
 I installed ModSecurity to monitor HTTP traffic. However, the default Wazuh configuration treated WAF warnings as low-priority events. To fix this, I analyzed the log format and wrote a Custom XML Rule (ID 100100) to elevate specific SQL Injection events to Critical Severity.
 
 Custom Rule Logic:
+
+XML
+
 <rule id="100100" level="12">
   <if_sid>30401</if_sid>
   <match>SQL Injection</match>
@@ -50,6 +54,7 @@ Custom Rule Logic:
   <group>modsecurity,attack,</group>
 </rule>
 The custom rule configuration in local_rules.xml.
+
 Phase 3: Detection & Analysis
 After reloading the Wazuh Manager, I re-executed the attack. The SIEM successfully correlated the ModSecurity log data and triggered a Level 12 Alert on the dashboard. The alert captured key details including the attacker's IP, the specific SQL payload, and the rule ID.
 
@@ -64,3 +69,7 @@ The WAF successfully blocking the attack payload, preventing access to the datab
 
 🏆 Conclusion
 This project validates the effectiveness of a layered defense strategy. By combining a Web Application Firewall for immediate threat blocking with a SIEM for long-term analysis and alerting, I created a robust security architecture capable of identifying and stopping web attacks before they cause data breaches.
+
+
+
+
