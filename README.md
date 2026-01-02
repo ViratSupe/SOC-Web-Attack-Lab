@@ -50,7 +50,7 @@ Custom Rule Logic:
   <description>WAF Critical: SQL Injection Attack Detected</description>
   <group>modsecurity,attack,</group>
 </rule>
-The custom rule configuration in local_rules.xml
+The custom rule configuration in local_rules.xml.
 
 Phase 3: Detection & Analysis
 After reloading the Wazuh Manager, I re-executed the attack. The SIEM successfully correlated the ModSecurity log data and triggered a Level 12 Alert on the dashboard. The alert captured key details including the attacker's IP, the specific SQL payload, and the rule ID.
